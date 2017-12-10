@@ -1,0 +1,43 @@
+{
+  "name": "hey-tony",
+  "version": "0.0.0",
+  "description": "Community built platform",
+  "scripts": {
+    "start": "node server",
+    "build": "webpack -p && cp app/index.html dist",
+    "build:dev": "webpack -d && cp app/index.html dist && webpack-dev-server --content-base app/ --inline --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rland12/Hey-Tony.git"
+  },
+  "authors": [
+    "Andre Garvin",
+    "Rashad Landrum"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rland12/Hey-Tony/issues"
+  },
+  "homepage": "https://github.com/Rland12/Hey-Tony#readme",
+  "dependencies": {
+    "@google-cloud/datastore": "^1.1.0",
+    "axios": "^0.17.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "messagebird": "^2.1.4",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "say": "^0.14.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.6",
+    "webpack-dev-server": "^2.7.1"
+  }
+}
