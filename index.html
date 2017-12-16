@@ -8,63 +8,71 @@
     
     <title>Document</title>
 </head>
-<body >
-    <div class="wrapper">
-        <div class="container-fluid col-md-9">
-            <div class="title">
-                <h1>Construction</h1>
-            </div>
-            <div class="card col-md-12">
-                <h2>New Building is up</h2>
-                <p>Construction workers are up on the job and working on the new Deli.</p>
-            </div>
-            <div class="card col-md-12">
-                <h2>New Building is up</h2>
-                <p>Construction workers are up on the job and working on the new Deli.</p>
-            </div>
-            <div class="card col-md-12">
-                 <h2>New Building is up</h2>
-                <p>Construction workers are up on the job and working on the new Deli.</p>
-            </div>
-        </div>
+<body>
+    <div id='app'>
     
-   
-        <div class="container-fluid col-md-9">
+    <div>
+        <input @mdodel='thread.title' type="text" placeholder='title'>
+        <input @mdodel='thread.body' type="text" placeholder='content'>
+    </div>
+    
+    <div class="wrapper">
+        <div v-for='board in boards' class="container-fluid col-md-9">
             <div class="title">
-                <h1>Transportation</h1>
+                <h1>{{ board.title }}</h1>
             </div>
             <div class="card col-md-12">
-                <h2>New Subway Train</h2>
-                <p>Everyone is Praising the New WTF train</p>
-            </div>
-            <div class="card col-md-12">
-                <h2>New Subway Train</h2>
-                <p>Everyone is Praising the New WTF train</p> 
-            </div>
-            <div class="card col-md-12">
-                <h2>New Subway Train</h2>
-                <p>Everyone is Praising the New WTF train</p>                   
-            </div>
-        </div>
-   
-
-        <div class="container-fluid col-md-9">
-            <div class="title">
-                <h1>Urban Development</h1>
-            </div>
-            <div class="card col-md-12">
-                    <h2>New Gorilla Park</h2>
-                    <p>Loving the new monkey themed park</p>
-            </div>
-            <div class="card col-md-12">
-                   <h2>New Gorilla Park</h2>
-                    <p>Loving the new monkey themed park</p>
-            </div>
-            <div class="card col-md-12">
-                   <h2>New Gorilla Park</h2>
-                    <p>Loving the new monkey themed park</p>                  
+                    <h2>{{ board.title }}</h2>
+                    <p>{{ board['description-compliant'] }}</p>
+                    <p>issue: {{ board['unique-id'] }}</p>
+                    <p>{{ board.created }}</p>
+                    <p>Compliant corellations</p>
+                    <ul v-for='type in board["complaint-type"]'>
+                        <li>{{ type }}</li>
+                    </ul>
+                    <button @click='subscribe(board.title, board.db_path)' class='btn btn-success'>subcribe</button>
             </div>
         </div>
     </div>
+    </div>
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vue@2.5.9/dist/vue.js"></script>
+    <script type="text/javascript">
+        const app = new Vue({
+            el: '#app',
+            data: {
+                boards: [],
+                thread: {
+                    title: '',
+                    body: ''
+                }
+            },
+            methods: {
+                onloadBoard: function() {
+                    axios.get.call(this, 'https://hey-tony-andregarvin.c9users.io/')
+                        .then(({ data }) => {
+                            this.boards = data
+                            console.log(this.boards)
+                        })
+                },
+                makeNewThread: function() {
+                    axios.post.call(this, 'https://hey-tony-andregarvin.c9users.io/create-thread', this.thread)
+                        .then(({ data }) => console.log(data))
+                },
+                subscribe: function( title, db_path ) {
+                    const number = prompt('Number')
+                    
+                    axios.post.call(this, 'https://hey-tony-andregarvin.c9users.io/subscribe', {
+                        title,
+                        db_path,
+                        number
+                    })
+                        .then(({ data }) => console.log(data))
+                }
+            }
+        })
+        app.onloadBoard()
+    </script>
 </body>
 </html>

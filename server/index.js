@@ -14,6 +14,13 @@ const SMS = require('./SMS.js')
 const url = 'https://data.cityofnewyork.us/resource/fhrw-4uyv.json'
 
 
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 async function fetchOpenData(cat, region, compliantType) {
     const { data } = await axios.get(url)
 
@@ -74,8 +81,8 @@ app.post('/subscribe', (req, res) => {
     SMS.subscribe({
         title,
     }, db_path, [ number ])
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+        .then(res => res.json(res))
+        .catch(err => res.json(err))
 })
 
 
