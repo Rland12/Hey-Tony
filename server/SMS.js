@@ -14,13 +14,11 @@ class SMS {
     sendMessage(thread, content) {
 
         async function _sendMessage({ title, thread_id, db_path }, content) {
-            const collection = await this.store.getCollection(db_path)
-            const { subscribers } = await collection
-
+            const { subscribers } = await this.store.getCollection(db_path)
             const params = {
                 'originator': 'MessageBird',
                 'recipients': await subscribers,
-                'body': `There is new compliant posted for ${title} issue ${thread_id} check it out check it out.`
+                'body': `There is new resolution posted for ${title} issue ${threadId} check it out check it out.`
             };
 
             messageBird.messages.create(params, async (err, response) => {
@@ -32,23 +30,23 @@ class SMS {
 
         return new Promise((resolve, reejct) => {
 
-            _sendMessage.call(this, thread, content)
+            return _sendMessage.call(this, thread, content)
                 .then(resp => resolve(resp))
                 .catch(err => reject(err))
         })
     }
 
-    subscribe({ title, thread_id }, db_path, number) {
+    subscribe({ title, threadUninqueId, db_path }, numbers) {
         return new Promise(resolve => {
 
-            return this.store.set(`${db_path}/subscribers`, [ number ])
+            return this.store.set(`${db_path}/subscribers`, numbers)
                 .then(() => {
                     const params = {
                         'originator': 'MessageBird',
-                        'recipients': number,
-                        'body': `Thank you for subscribing for to borough board,
-                        you are now subscribed to thread ${title} issue ${db_path.split('/').slice(-1)}.
-                        Here is link to the thread to foloow more details in your community.`
+                        'recipients': numbers,
+                        'body': `Thank you for subscribing for to borough board, you are now subscribed to thread ${title} issue ${threadUninqueId}.
+                        Here is link to the thread to follow more details in your community.
+                        ${'https://www.google.com'}`
                     };
 
                     messageBird.messages.create(params, (err, response) => {

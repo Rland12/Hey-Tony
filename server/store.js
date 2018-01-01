@@ -1,15 +1,12 @@
 const firebase = require('firebase')
 
-const dotenv = require('dotenv')
-dotenv.load()
-
 firebase.initializeApp({
-    apiKey: "AIzaSyCf8vSpeSU6HBmvVi5wSVilATJnKlWbXgM",
-    authDomain: "heytony-188521.firebaseapp.com",
-    databaseURL: "https://heytony-188521.firebaseio.com",
-    projectId: "heytony-188521",
-    storageBucket: "heytony-188521.appspot.com",
-    messagingSenderId: "1063533574405"
+    apiKey: "AIzaSyAYy-0Z5P-9_Vx1hnlzjhZkfNJPamBBizA",
+    authDomain: "borough-board.firebaseapp.com",
+    databaseURL: "https://borough-board.firebaseio.com",
+    projectId: "borough-board",
+    storageBucket: "",
+    messagingSenderId: "359046300703"
 })
 
 
