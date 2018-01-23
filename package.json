@@ -2,9 +2,10 @@
   "name": "hey-tony",
   "version": "0.0.0",
   "description": "Community built platform",
+  "main": "main.js",
   "scripts": {
-    "start": "node server",
-    "dev": "nodemon server"
+    "start": "node .",
+    "dev": "nodemon ."
   },
   "repository": {
     "type": "git",

@@ -7,13 +7,13 @@ const app = express()
 const bodyParser =  require('body-parser')
 
 // the firebase API wrapper
-const store =  require('./store')
+const store =  require('./src/store')
 const Store = new store('/board') 
 
 // the SMS API wrapper
-const SMS = require('./SMS.js')
+const SMS = require('./src/SMS.js')
 
-const createBoard = require('./createBoard.js')
+const createBoard = require('./src/createBoard.js')
 
 app.use(bodyParser.json())
 
@@ -23,7 +23,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(express.static(join('../app')))
+app.use(express.static(join(__dirname, 'Public')))
 
 app.get('/error', (req, resp) => {
     resp.json({

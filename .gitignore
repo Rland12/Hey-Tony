@@ -5,7 +5,3 @@ dist
 data.json
 
 .env
-
-app
-
-webpack.config.js

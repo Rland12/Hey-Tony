@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+    <title>Borough board</title>
+</head>
+<body>
+    <div id='app'>
+    
+    <div>
+        <input @mdodel='thread.title' type="text" placeholder='title'>
+        <input @mdodel='thread.body' type="text" placeholder='content'>
+    </div>
+    
+    <div class="wrapper">
+        <div v-for='board in boards' class="container-fluid col-md-9">
+            <div class="title">
+                <h1>{{ board.title }}</h1>
+            </div>
+            <div class="card col-md-12">
+                    <h2>{{ board.title }}</h2>
+                    <p>{{ board['description-compliant'] }}</p>
+                    <p>issue: {{ board['unique-id'] }}</p>
+                    <p>{{ board.created }}</p>
+                    <p>Compliant corellations</p>
+                    <ul v-for='type in board["complaint-type"]'>
+                        <li>{{ type }}</li>
+                    </ul>
+                    <button @click='subscribe(board.title, board.db_path)' class='btn btn-success'>subcribe</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    <script type="text/javascript" src="https://unpkg.com/vue@2.5.9/dist/vue.js"></script>
+    <script type="text/javascript">
+        // const app = new Vue({
+        //     el: '#app',
+        //     data: {
+        //         boards: [],
+        //         thread: {
+        //             title: '',
+        //             body: ''
+        //         }
+        //     },
+        //     methods: {
+        //         onloadBoard: function() {
+        //             axios.get.call(this, 'https://hey-tony-andregarvin.c9users.io/')
+        //                 .then(({ data }) => {
+        //                     this.boards = data
+        //                     console.log(this.boards)
+        //                 })
+        //         },
+        //         makeNewThread: function() {
+        //             axios.post.call(this, 'https://hey-tony-andregarvin.c9users.io/create-thread', this.thread)
+        //                 .then(({ data }) => console.log(data))
+        //         },
+        //         subscribe: function( title, db_path ) {
+        //             const number = prompt('Number')
+                    
+        //             axios.post.call(this, 'https://hey-tony-andregarvin.c9users.io/subscribe', {
+        //                 title,
+        //                 db_path,
+        //                 number
+        //             })
+        //                 .then(({ data }) => console.log(data))
+        //         }
+        //     }
+        // })
+        // app.onloadBoard()
+    </script>
+</body>
+</html>
